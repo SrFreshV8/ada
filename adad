@@ -1,0 +1,13 @@
+# Let's try extracting a smaller section of the image first to optimize the OCR process
+
+# Crop the image to a smaller section where the text might be located
+cropped_img = img.crop((0, 0, img.width, img.height // 4))  # Adjusting the crop area
+
+# Perform OCR on the cropped image
+cropped_text = pytesseract.image_to_string(cropped_img)
+
+# Search for the word 'player' in the cropped text
+occurrences = [(i.start(), i.end()) for i in re.finditer(search_word, cropped_text.lower())]
+occurrences_count = len(occurrences)
+
+occurrences_count, occurrences
